@@ -113,7 +113,9 @@ async function fetchAllData() {
   fetchPrice(symbol);
   fetchFundamentals(symbol);
   fetchChart("1month");
-
+  if (!isIndianStock(symbol)){
+    fetchPeerComparison(symbol);
+  }
   localStorage.setItem("lastSearchedSymbol", symbol);
   localStorage.setItem("isIndianStock", isIndianStock(symbol));
 }
@@ -160,6 +162,46 @@ function toggleDropdown() {
 window.onclick = function(event) {
   if (!event.target.matches('.dropbtn')) {
     document.querySelectorAll(".dropdown-content.show").forEach(d => d.classList.remove('show'));
+  }
+}
+
+async function runScreener() {
+  const minCap = Number(document.getElementById("minMarketCap").value || 0);
+  const minDiv = Number(document.getElementById("minDividend").value || 0);
+  const resultBox = document.getElementById("screenerResults");
+
+  resultBox.innerHTML = `<p>🔄 Loading...</p>`;
+
+  try {
+    const res = await fetch(`https://financialmodelingprep.com/api/v3/stock-screener?marketCapMoreThan=${minCap}&dividendMoreThan=${minDiv}&limit=10&exchange=NASDAQ&apikey=${fmpApiKey}`);
+    const data = await res.json();
+
+    if (!Array.isArray(data) || data.length === 0) {
+      resultBox.innerHTML = `<p>⚠ No stocks found matching your criteria.</p>`;
+      return;
+    }
+
+    resultBox.innerHTML = `
+      <table border="1" style="width:100%; border-collapse: collapse; text-align:center;">
+        <tr style="background-color:#f0f0f0;">
+          <th>Symbol</th>
+          <th>Company</th>
+          <th>Market Cap</th>
+          <th>Dividend Yield</th>
+        </tr>
+        ${data.map(stock => `
+          <tr>
+            <td>${stock.symbol}</td>
+            <td>${stock.companyName ?? 'N/A'}</td>
+            <td>₹${Number(stock.marketCap).toLocaleString()}</td>
+            <td>${stock.lastDiv ?? 'N/A'}%</td>
+          </tr>
+        `).join("")}
+      </table>
+    `;
+  } catch (err) {
+    resultBox.innerHTML = `<p>⚠ Error fetching screener data</p>`;
+    console.error("Screener error:", err);
   }
 }
 

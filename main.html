@@ -17,7 +17,7 @@
         <a href="#">Home</a>
         <a href="dashboard.html">Dashboard</a>
         <a href="#screener-section">Screener</a>
-        <a href="#about">About</a>
+        <a href="aboutUs.html">About</a>
         <div class="dropdown">
           <a href="#" class="dropbtn" onclick="toggleDropdown()">More ▾</a>
           <div class="dropdown-content" id="dropdownMenu">
@@ -55,11 +55,24 @@
     </section>
 
     <!-- Screener Section -->
-    <section id="screener-section" class="screener-section">
-      <h2>Stock Screener</h2>
-      <p>This screener is currently under construction. More features coming soon!</p>
-      <div id="screenerResults"></div>
-    </section>
+    <!-- Screener Section -->
+<section id="screener-section" class="screener-section">
+  <h2>📊 Stock Screener</h2>
+
+  <div style="margin-bottom: 20px;">
+    <label>Minimum Market Cap (₹):</label>
+    <input type="number" id="minMarketCap" placeholder="e.g., 100000000000">
+  </div>
+
+  <div style="margin-bottom: 20px;">
+    <label>Minimum Dividend Yield (%):</label>
+    <input type="number" id="minDividend" placeholder="e.g., 2">
+  </div>
+
+  <button onclick="runScreener()">Run Screener</button>
+
+  <div id="screenerResults" style="margin-top: 30px;"></div>
+</section>
 
     <!-- Future Sections -->
     <section id="portfolio" class="screener-section">
