@@ -7,15 +7,50 @@ function isIndianStock(symbol) {
   return symbol.endsWith(".NS") || symbol.endsWith(".BSE");
 }
 
+function savePriceAlert() {
+  const symbol = document.getElementById("alertSymbol").value.trim().toUpperCase();
+  const target = parseFloat(document.getElementById("alertPrice").value);
+  if (!symbol || isNaN(target)) {
+    alert("⚠ Please enter valid symbol and price.");
+    return;
+  }
+
+  localStorage.setItem("priceAlertSymbol", symbol);
+  localStorage.setItem("priceAlertValue", target);
+  alert(`📢 Alert set for ${symbol} at ₹${target}`);
+}
+
+// Call this inside fetchPrice()
+async function checkPriceAlert(symbol, currentPrice) {
+  const alertSymbol = localStorage.getItem("priceAlertSymbol");
+  const alertValue = parseFloat(localStorage.getItem("priceAlertValue"));
+
+  if (alertSymbol === symbol && !isNaN(alertValue)) {
+    if (parseFloat(currentPrice) >= alertValue) {
+      alert(`🚨 ${symbol} has reached ₹${currentPrice}, above your alert of ₹${alertValue}`);
+      // Clear after alert triggers
+      localStorage.removeItem("priceAlertSymbol");
+      localStorage.removeItem("priceAlertValue");
+    }
+  }
+}
+
 async function fetchPrice(symbol) {
   try {
     const res = await fetch(`https://api.twelvedata.com/price?symbol=${symbol}&apikey=${twelveApiKey}`);
     const data = await res.json();
+
     if (data.status === "error" || !data.price) {
       document.getElementById("price").innerHTML = `<p>⚠ Price not available for ${symbol}</p>`;
       return;
     }
-    document.getElementById("price").innerHTML = `<h3>Current Price: ₹${data.price}</h3>`;
+
+    const price = parseFloat(data.price);
+    document.getElementById("price").innerHTML = `<h3>Current Price: ₹${price}</h3>`;
+
+    // 🔔 Check for price alert
+    checkPriceAlert(symbol, price);
+    
   } catch {
     document.getElementById("price").innerHTML = `<p>⚠ Error fetching price</p>`;
   }
@@ -207,10 +242,55 @@ async function runScreener() {
 
 // Dark Mode
 function toggleDarkMode() {
-  document.body.classList.toggle("dark-mode");
+  const body = document.body;
+  body.classList.toggle("dark-mode");
+
+  // Save to localStorage
+  const isDark = body.classList.contains("dark-mode");
+  localStorage.setItem("darkMode", isDark);
+
+  // Update checkbox state
+  const toggle = document.getElementById("darkModeToggle");
+  if (toggle) toggle.checked = isDark;
+}
+
+function saveRefreshInterval() {
+  const minutes = parseInt(document.getElementById("refreshInterval").value);
+  localStorage.setItem("refreshInterval", minutes);
+  setupAutoRefresh(); // apply immediately
+}
+
+function setupAutoRefresh() {
+  const interval = parseInt(localStorage.getItem("refreshInterval") || "0");
+  if (window.autoRefreshInterval) clearInterval(window.autoRefreshInterval);
+  if (interval > 0) {
+    window.autoRefreshInterval = setInterval(() => {
+      fetchAllData();
+    }, interval * 60 * 1000);
+  }
+}
+
+function resetAllSettings() {
+  if (confirm("Are you sure you want to reset all settings?")) {
+    localStorage.clear();
+    location.reload();
+  }
 }
 
 // 🔄 Trigger suggestions on typing
 window.onload = () => {
   document.getElementById("symbolInput").addEventListener("input", suggestSymbols);
-}
+  
+  // Restore dark mode
+  const isDark = localStorage.getItem("darkMode") === "true";
+  if (isDark) document.body.classList.add("dark-mode");
+
+  // Restore refresh interval
+  const refresh = localStorage.getItem("refreshInterval");
+  if (refresh) {
+    const input = document.getElementById("refreshInterval");
+    if (input) input.value = refresh;
+  }
+
+  setupAutoRefresh();
+};

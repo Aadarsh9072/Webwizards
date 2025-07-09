@@ -82,7 +82,26 @@
 
     <section id="settings" class="screener-section">
       <h2>Settings</h2>
-      <p>Coming soon: notification preferences, currency settings, etc.</p>
+
+      <div style="margin: 20px 0;">
+        <label for="darkModeToggle" style="font-size: 18px;">🌙 Dark Mode</label>
+        <input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode()" style="margin-left: 10px;">
+      </div>
+
+      <p>Toggle between light and dark themes to enhance your viewing experience.</p>
+      <div style="margin: 20px 0;">
+        <label for="refreshInterval">🔄 Auto Refresh Interval (minutes):</label>
+        <input type="number" id="refreshInterval" min="0" placeholder="0 = Off" onchange="saveRefreshInterval()" />
+      </div>
+      <div style="margin: 20px 0;">
+        <label>📢 Price Alert:</label>
+        <input type="text" id="alertSymbol" placeholder="e.g., AAPL">
+        <input type="number" id="alertPrice" placeholder="Target Price">
+        <button onclick="savePriceAlert()">Set Alert</button>
+      </div>
+      <div style="margin: 20px 0;">
+        <button onclick="resetAllSettings()" style="background:red; color:white; padding:8px 15px;">Reset All Settings</button>
+      </div>
     </section>
 
     <section id="contact" class="screener-section">
