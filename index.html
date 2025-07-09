@@ -5,38 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>StockSphere</title>
   <link rel="stylesheet" href="style.css">
-    
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <header>
     <nav class="navbar">
-    
-       <a href="#" class="logo">
-  <img src="logo.png.jpeg" alt="StockSphere Logo">
-</a>
+      <a href="#" class="logo">
+        <img src="logo.png.jpeg" alt="StockSphere Logo">
+      </a>
       <div class="nav-links">
         <a href="#">Home</a>
         <a href="#dashboard">Dashboard</a>
         <a href="#screener-section">Screener</a>
         <a href="#about">About</a>
-          <div class="dropdown">
-  <a href="#" class="dropbtn" onclick="toggleDropdown()">More ▾</a>
-  <div class="dropdown-content" id="dropdownMenu">
-    <a href="#portfolio">Portfolio</a>
-    <a href="#settings">Settings</a>
-    <a href="#contact">Contact</a>
-    <a href="#" onclick="toggleDarkMode()">Toggle Dark Mode</a>
-  </div>
-</div>
+        <div class="dropdown">
+          <a href="#" class="dropbtn" onclick="toggleDropdown()">More ▾</a>
+          <div class="dropdown-content" id="dropdownMenu">
+            <a href="#portfolio">Portfolio</a>
+            <a href="#settings">Settings</a>
+            <a href="#contact">Contact</a>
+            <a href="#" onclick="toggleDarkMode()">Toggle Dark Mode</a>
+          </div>
+        </div>
       </div>
-     </nav>
+    </nav>
   </header>
 
   <main class="main-container">
-    <section class="search-section">
+    <!-- Stock Analyzer Section -->
+    <section class="search-section" id="dashboard">
       <h2>Analyze a Company</h2>
       <input type="text" id="symbolInput" placeholder="e.g., INFY.BSE or TATAMOTORS.NS">
+      <!-- 🧠 Suggestions will show here -->
+      <div id="suggestions" class="suggestions-box"></div>
       <button onclick="fetchAllData()">Search</button>
 
       <div id="price"></div>
@@ -47,20 +48,38 @@
         <button onclick="fetchChart('6month')">6M</button>
         <button onclick="fetchChart('1year')">1Y</button>
       </div>
+
       <div id="chart-container">
         <canvas id="stockChart"></canvas>
       </div>
     </section>
 
+    <!-- Screener Section -->
     <section id="screener-section" class="screener-section">
       <h2>Stock Screener</h2>
       <p>This screener is currently under construction. More features coming soon!</p>
       <div id="screenerResults"></div>
     </section>
+
+    <!-- Future Sections -->
+    <section id="portfolio" class="screener-section">
+      <h2>Your Portfolio</h2>
+      <p>Coming soon: personalized portfolio tracking and alerts.</p>
+    </section>
+
+    <section id="settings" class="screener-section">
+      <h2>Settings</h2>
+      <p>Coming soon: notification preferences, currency settings, etc.</p>
+    </section>
+
+    <section id="contact" class="screener-section">
+      <h2>Contact Us</h2>
+      <p>Have feedback or need support? Email us at <a href="mailto:support@stocksphere.com">support@stocksphere.com</a></p>
+    </section>
   </main>
 
   <footer id="about">
-    <p>&copy; 2025 StockAnalyzer - Built for Hackathon with ❤ in India.</p>
+    <p>&copy; 2025 StockSphere — Built for Hackathon with ❤ in India.</p>
   </footer>
 
   <script src="script.js"></script>
