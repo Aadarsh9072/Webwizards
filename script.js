@@ -41,15 +41,15 @@ async function fetchFundamentals(symbol) {
 
     const company = data[0];
     document.getElementById("fundamentals").innerHTML = `
-      <h3>${company.companyName}</h3>
-      <p><b>Industry:</b> ${company.industry}</p>
-      <p><b>Market Cap:</b> ₹${Number(company.mktCap).toLocaleString()}</p>
-      <p><b>PE Ratio:</b> ${company.pe}</p>
-      <p><b>ROE:</b> ${company.roe}%</p>
-      <p><b>Book Value:</b> ₹${company.price}</p>
-      <p><b>Dividend Yield:</b> ${company.lastDiv}%</p>
-      <p><b>52 Week Range:</b> ${company.range}</p>
-    `;
+    <h3>${company.companyName}</h3>
+    <p><b>Industry:</b> ${company.industry}</p>
+    <p><b>Market Cap:</b> ₹${Number(company.mktCap).toLocaleString()}</p>
+    <p><b>PE Ratio:</b> ${company.priceEarningsRatio ?? 'N/A'}</p>
+    <p><b>ROE:</b> ${company.returnOnEquityTTM ?? 'N/A'}%</p>
+    <p><b>Book Value:</b> ₹${company.price}</p>
+    <p><b>Dividend Yield:</b> ${company.lastDiv ?? 'N/A'}%</p>
+    <p><b>52 Week Range:</b> ${company.range ?? 'N/A'}</p>
+  `;
   } catch {
     document.getElementById("fundamentals").innerHTML = `<p>⚠ Error fetching fundamentals</p>`;
   }

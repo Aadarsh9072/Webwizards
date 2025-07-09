@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StockSphere | Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: linear-gradient(to right, #e3f2fd, #fce4ec);
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header h1 {
+      font-size: 28px;
+      color: #007bff;
+      font-weight: 600;
+    }
+
+    .dashboard-section {
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .dashboard-section h2 {
+      font-size: 40px;
+      color: #2c3e50;
+      margin-bottom: 40px;
+    }
+
+    .dashboard-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 30px;
+    }
+
+    .dashboard-card {
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease;
+    }
+
+    .dashboard-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .dashboard-card h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #444;
+    }
+
+    .dashboard-card p {
+      font-size: 28px;
+      font-weight: bold;
+      color: #007bff;
+    }
+
+    .dashboard-card span {
+      font-size: 24px;
+      margin-right: 6px;
+    }
+
+    .button-back {
+      display: inline-block;
+      margin-top: 50px;
+      padding: 12px 30px;
+      background: linear-gradient(90deg, #007bff, #00c6ff);
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    .button-back:hover {
+      background: linear-gradient(90deg, #0056b3, #0096c7);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #ffffff90;
+      color: #666;
+      font-size: 14px;
+      margin-top: 60px;
+      backdrop-filter: blur(5px);
+    }
+
+    @media(max-width: 768px) {
+      header h1 {
+        font-size: 22px;
+      }
+      .dashboard-section h2 {
+        font-size: 28px;
+      }
+      .dashboard-card p {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>📊 StockSphere Dashboard</h1>
+  </header>
+
+  <section class="dashboard-section">
+    <h2>📈 Market Overview</h2>
+
+    <div class="dashboard-cards">
+      <div class="dashboard-card">
+        <h3>Market Cap</h3>
+        <p><span>💰</span><span id="marketCap">₹1.2T</span></p>
+      </div>
+      <div class="dashboard-card">
+        <h3>PE Ratio</h3>
+        <p><span>📊</span><span id="peRatio">28.7</span></p>
+      </div>
+      <div class="dashboard-card">
+        <h3>52 Week High</h3>
+        <p><span>📈</span><span id="weekHigh">₹1,975</span></p>
+      </div>
+      <div class="dashboard-card">
+        <h3>52 Week Low</h3>
+        <p><span>📉</span><span id="weekLow">₹1,290</span></p>
+      </div>
+      <div class="dashboard-card">
+        <h3>EPS (Earnings/Share)</h3>
+        <p><span>💹</span><span id="eps">₹32.5</span></p>
+      </div>
+      <div class="dashboard-card">
+        <h3>Dividend Yield</h3>
+        <p><span>🏦</span><span id="dividend">1.2%</span></p>
+      </div>
+    </div>
+
+    <a href="index.html" class="button-back">← Back to Home</a>
+  </section>
+
+  <footer>
+    &copy; 2025 StockSphere | Dashboard by <strong>Team WebWizards</strong> 🚀
+  </footer>
+
+  <script>
+    // Example dynamic update
+    document.getElementById("marketCap").innerText = "₹2.3T";
+    document.getElementById("peRatio").innerText = "30.1";
+    document.getElementById("weekHigh").innerText = "₹2,145";
+    document.getElementById("weekLow").innerText = "₹1,180";
+    document.getElementById("eps").innerText = "₹36.8";
+    document.getElementById("dividend").innerText = "1.4%";
+  </script>
+
+</body>
+</html>

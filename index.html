@@ -2,86 +2,92 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>StockSphere</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to StockSphere</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-container {
+      max-width: 900px;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(12px);
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      background: linear-gradient(90deg, #00e5ff, #00c853);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      color: #e0f7fa;
+    }
+
+    .cta-button {
+      background-color: #00e676;
+      border: none;
+      color: #000;
+      padding: 15px 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .cta-button:hover {
+      background-color: #00c853;
+    }
+
+    .tagline {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      font-weight: 500;
+      color: #a7ffeb;
+    }
+
+    .sparkle {
+      font-size: 1.8rem;
+      color: #ffe082;
+      animation: blink 2s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <nav class="navbar">
-      <a href="#" class="logo">
-        <img src="logo.png.jpeg" alt="StockSphere Logo">
-      </a>
-      <div class="nav-links">
-        <a href="#">Home</a>
-        <a href="#dashboard">Dashboard</a>
-        <a href="#screener-section">Screener</a>
-        <a href="#about">About</a>
-        <div class="dropdown">
-          <a href="#" class="dropbtn" onclick="toggleDropdown()">More ▾</a>
-          <div class="dropdown-content" id="dropdownMenu">
-            <a href="#portfolio">Portfolio</a>
-            <a href="#settings">Settings</a>
-            <a href="#contact">Contact</a>
-            <a href="#" onclick="toggleDarkMode()">Toggle Dark Mode</a>
-          </div>
-        </div>
-      </div>
-    </nav>
-  </header>
-
-  <main class="main-container">
-    <!-- Stock Analyzer Section -->
-    <section class="search-section" id="dashboard">
-      <h2>Analyze a Company</h2>
-      <input type="text" id="symbolInput" placeholder="e.g., INFY.BSE or TATAMOTORS.NS">
-      <!-- 🧠 Suggestions will show here -->
-      <div id="suggestions" class="suggestions-box"></div>
-      <button onclick="fetchAllData()">Search</button>
-
-      <div id="price"></div>
-      <div id="fundamentals"></div>
-
-      <div class="tab-buttons">
-        <button onclick="fetchChart('1month')">1M</button>
-        <button onclick="fetchChart('6month')">6M</button>
-        <button onclick="fetchChart('1year')">1Y</button>
-      </div>
-
-      <div id="chart-container">
-        <canvas id="stockChart"></canvas>
-      </div>
-    </section>
-
-    <!-- Screener Section -->
-    <section id="screener-section" class="screener-section">
-      <h2>Stock Screener</h2>
-      <p>This screener is currently under construction. More features coming soon!</p>
-      <div id="screenerResults"></div>
-    </section>
-
-    <!-- Future Sections -->
-    <section id="portfolio" class="screener-section">
-      <h2>Your Portfolio</h2>
-      <p>Coming soon: personalized portfolio tracking and alerts.</p>
-    </section>
-
-    <section id="settings" class="screener-section">
-      <h2>Settings</h2>
-      <p>Coming soon: notification preferences, currency settings, etc.</p>
-    </section>
-
-    <section id="contact" class="screener-section">
-      <h2>Contact Us</h2>
-      <p>Have feedback or need support? Email us at <a href="mailto:support@stocksphere.com">support@stocksphere.com</a></p>
-    </section>
-  </main>
-
-  <footer id="about">
-    <p>&copy; 2025 StockSphere — Built for Hackathon with ❤ in India.</p>
-  </footer>
-
-  <script src="script.js"></script>
+  <div class="hero-container">
+    <div class="sparkle">✨</div>
+    <h1>Welcome to <span style="color: #00e5ff">StockSphere</span></h1>
+    <p class="tagline">Your 360° view of the Stock Market</p>
+    <p>Explore trends, analyze stocks, and manage your portfolio with confidence — all in one place.</p>
+    <a href="main.html"><button class="cta-button">Launch Dashboard 🚀</button></a>
+  </div>
 </body>
 </html>
