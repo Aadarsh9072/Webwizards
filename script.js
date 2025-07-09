@@ -148,9 +148,6 @@ async function fetchAllData() {
   fetchPrice(symbol);
   fetchFundamentals(symbol);
   fetchChart("1month");
-  if (!isIndianStock(symbol)){
-    fetchPeerComparison(symbol);
-  }
   localStorage.setItem("lastSearchedSymbol", symbol);
   localStorage.setItem("isIndianStock", isIndianStock(symbol));
 }

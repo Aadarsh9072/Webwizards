@@ -171,53 +171,53 @@
     </footer>
 
     <script>
-    const fmpApiKey = "ouRjyJrZ2NiHvEqVDK5lsvAMh51DFfiw"; // Put your real key
+      const fmpApiKey = "ouRjyJrZ2NiHvEqVDK5lsvAMh51DFfiw";
 
-    window.onload = async function () {
+      window.onload = async function () {
         const symbol = localStorage.getItem("lastSearchedSymbol");
         const isIndian = localStorage.getItem("isIndianStock") === "true";
 
         const heading = document.querySelector(".dashboard-section h2");
 
         if (!symbol) {
-        heading.innerText = "No stock searched.";
-        return;
+          heading.innerText = "No stock searched.";
+          return;
         }
 
         heading.innerText = `📈 Market Overview for ${symbol}`;
 
         if (isIndian) {
-        document.getElementById("marketCap").innerText = "N/A";
-        document.getElementById("peRatio").innerText = "N/A";
-        document.getElementById("weekHigh").innerText = "N/A";
-        document.getElementById("weekLow").innerText = "N/A";
-        document.getElementById("eps").innerText = "N/A";
-        document.getElementById("dividend").innerText = "N/A";
-        return;
+          document.getElementById("marketCap").innerText = "N/A";
+          document.getElementById("peRatio").innerText = "N/A";
+          document.getElementById("weekHigh").innerText = "N/A";
+          document.getElementById("weekLow").innerText = "N/A";
+          document.getElementById("eps").innerText = "N/A";
+          document.getElementById("dividend").innerText = "N/A";
+          return;
         }
 
         try {
-        const res = await fetch(`https://financialmodelingprep.com/api/v3/profile/${symbol}?apikey=${fmpApiKey}`);
-        const data = await res.json();
+          const res = await fetch(`https://financialmodelingprep.com/api/v3/profile/${symbol}?apikey=${fmpApiKey}`);
+          const data = await res.json();
 
-        if (!Array.isArray(data) || data.length === 0 || !data[0].symbol) {
+          if (!Array.isArray(data) || data.length === 0 || !data[0].symbol) {
             heading.innerText = `⚠ No data found for ${symbol}`;
             return;
-        }
+          }
 
-        const stock = data[0];
+          const stock = data[0];
 
-        document.getElementById("marketCap").innerText = `₹${(stock.mktCap || 0).toLocaleString()}`;
-        document.getElementById("peRatio").innerText = stock.priceEarningsRatio ?? "N/A";
-        document.getElementById("weekHigh").innerText = stock.range?.split("-")[1]?.trim() ?? "N/A";
-        document.getElementById("weekLow").innerText = stock.range?.split("-")[0]?.trim() ?? "N/A";
-        document.getElementById("eps").innerText = `₹${stock.eps ?? "N/A"}`;
-        document.getElementById("dividend").innerText = `${stock.lastDiv ?? "N/A"}%`;
+          document.getElementById("marketCap").innerText = `₹${Number(stock.mktCap || 0).toLocaleString()}`;
+          document.getElementById("peRatio").innerText = stock.priceEarningsRatio ?? "N/A";
+          document.getElementById("weekHigh").innerText = stock.range?.split("-")[1]?.trim() ?? "N/A";
+          document.getElementById("weekLow").innerText = stock.range?.split("-")[0]?.trim() ?? "N/A";
+          document.getElementById("eps").innerText = `₹${stock.eps ?? "N/A"}`;
+          document.getElementById("dividend").innerText = `${stock.lastDiv ?? "N/A"}%`;
         } catch (err) {
-        heading.innerText = `⚠ Error loading data for ${symbol}`;
-        console.error(err);
+          heading.innerText = `⚠ Error loading data for ${symbol}`;
+          console.error(err);
         }
-    };
+      };
     </script>
 
 </body>
