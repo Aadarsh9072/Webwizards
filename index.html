@@ -3,20 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Stock Analyzer</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>StockSphere</title>
+  <link rel="stylesheet" href="style.css">
+    
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <header>
     <nav class="navbar">
-      <h1 class="logo">StockAnalyzer</h1>
+    
+       <a href="#" class="logo">
+  <img src="logo.png.jpeg" alt="StockSphere Logo">
+</a>
       <div class="nav-links">
         <a href="#">Home</a>
+        <a href="#dashboard">Dashboard</a>
         <a href="#screener-section">Screener</a>
         <a href="#about">About</a>
+          <div class="dropdown">
+  <a href="#" class="dropbtn" onclick="toggleDropdown()">More ▾</a>
+  <div class="dropdown-content" id="dropdownMenu">
+    <a href="#portfolio">Portfolio</a>
+    <a href="#settings">Settings</a>
+    <a href="#contact">Contact</a>
+    <a href="#" onclick="toggleDarkMode()">Toggle Dark Mode</a>
+  </div>
+</div>
       </div>
-    </nav>
+     </nav>
   </header>
 
   <main class="main-container">

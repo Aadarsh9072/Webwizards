@@ -1,35 +1,81 @@
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
-  background-color: #f4f7fa;
+  background-color: #1c1c1c;
   color: #333;
 }
 
 header {
-  background-color: white;
+  background-color: #0f0f0f;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   padding: 10px 20px;
   position: sticky;
   top: 0;
   z-index: 10;
 }
-
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 10px 0;
+}
+ .logo img {
+  height: 100px; 
+  width: 100px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  filter: drop-shadow(0 0 5px rgba(0, 188, 212, 0.4));
 }
 
-.logo {
-  font-size: 1.5rem;
-  color: #2c3e50;
-}
+
 
 .nav-links a {
   margin-left: 15px;
   text-decoration: none;
-  color: #555;
+  color: hsl(0, 0%, 100%);
   font-weight: 500;
+}
+.nav-links a:hover {
+  color: #5f5c5c;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+
+.dropbtn {
+  color: #00bcd4;
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #1e1e1e;
+  min-width: 160px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 8px;
+}
+
+.dropdown-content a {
+  color: #e0e0e0;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #333;
+}
+
+.show {
+  display: block;
 }
 
 .main-container {
@@ -38,9 +84,13 @@ header {
   margin: auto;
 }
 
-.search-section,
+.search-section{
+  background-color: #1e1e2f;
+  color: white;
+}
 .screener-section {
-  background-color: white;
+  background-color: #1e1e2f;
+  color:white;
   padding: 25px;
   border-radius: 12px;
   margin-bottom: 30px;
@@ -88,6 +138,7 @@ canvas {
 #price h3 {
   margin: 8px 0;
 }
+
 
 footer {
   text-align: center;

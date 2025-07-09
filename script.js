@@ -1,5 +1,24 @@
-// API Keys
-const twelveApiKey = "5138ca38303e4af19b38b08e35f9c629"; // Your TwelveData key
+
+  function toggleDropdown() {
+    document.getElementById("dropdownMenu").classList.toggle("show");
+  }
+  window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      for (let i = 0; i < dropdowns.length; i++) {
+        let openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }
+  }
+
+  // Optional: Dark mode toggle function
+  function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+  }
+  const twelveApiKey = "5138ca38303e4af19b38b08e35f9c629"; // Your TwelveData key
 const fmpApiKey = "ouRjyJrZ2NiHvEqVDK5lsvAMh51DFfiw";     // Your FMP key
 
 let chartRef = null;
@@ -103,6 +122,7 @@ async function fetchAllData() {
   fetchFundamentals(symbol);
   fetchChart("1month");
 }
+
 
 function runScreener() {
   document.getElementById("screenerResults").innerHTML = `
