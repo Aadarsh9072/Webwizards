@@ -41,15 +41,21 @@ async function fetchFundamentals(symbol) {
 
     const company = data[0];
     document.getElementById("fundamentals").innerHTML = `
-    <h3>${company.companyName}</h3>
-    <p><b>Industry:</b> ${company.industry}</p>
-    <p><b>Market Cap:</b> ₹${Number(company.mktCap).toLocaleString()}</p>
-    <p><b>PE Ratio:</b> ${company.priceEarningsRatio ?? 'N/A'}</p>
-    <p><b>ROE:</b> ${company.returnOnEquityTTM ?? 'N/A'}%</p>
-    <p><b>Book Value:</b> ₹${company.price}</p>
-    <p><b>Dividend Yield:</b> ${company.lastDiv ?? 'N/A'}%</p>
-    <p><b>52 Week Range:</b> ${company.range ?? 'N/A'}</p>
-  `;
+      <h3>${company.companyName}</h3>
+      <p><b>Industry:</b> ${company.industry}</p>
+      <p><b>Exchange:</b> ${company.exchange}</p>
+      <p><b>Country:</b> ${company.country}</p>
+      <p><b>Market Cap:</b> ₹${Number(company.mktCap).toLocaleString()}</p>
+      <p><b>PE Ratio:</b> ${company.priceEarningsRatio ?? 'N/A'}</p>
+      <p><b>ROE:</b> ${company.returnOnEquityTTM ?? 'N/A'}%</p>
+      <p><b>EPS:</b> ₹${company.eps ?? 'N/A'}</p>
+      <p><b>Dividend Yield:</b> ${company.lastDiv ?? 'N/A'}%</p>
+      <p><b>52 Week Range:</b> ${company.range ?? 'N/A'}</p>
+      <p><b>IPO Date:</b> ${company.ipoDate ?? 'N/A'}</p>
+      <p><b>CEO:</b> ${company.ceo ?? 'N/A'}</p>
+      <p><b>Website:</b> <a href="${company.website}" target="_blank">${company.website}</a></p>
+      <p style="margin-top: 10px;"><b>Description:</b><br>${company.description ?? 'N/A'}</p>
+    `;
   } catch {
     document.getElementById("fundamentals").innerHTML = `<p>⚠ Error fetching fundamentals</p>`;
   }
@@ -107,6 +113,9 @@ async function fetchAllData() {
   fetchPrice(symbol);
   fetchFundamentals(symbol);
   fetchChart("1month");
+
+  localStorage.setItem("lastSearchedSymbol", symbol);
+  localStorage.setItem("isIndianStock", isIndianStock(symbol));
 }
 
 // 🧠 Symbol Suggestion
